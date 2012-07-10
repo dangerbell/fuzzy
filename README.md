@@ -13,11 +13,12 @@ You have been given root access to the following ubuntu machine.
 
 The rules are pretty simple:
 
-1. Use python / django 
-2. Use the twitter API
-3. Do something cool
-4. Deploy it to the provided machine
-5. Private whatever necessary to set up your project on a new box.  We will deploy it locally to try it out aswell.
+1. Do your work in a branch and submit a pull request when you are ready.
+2. Use python / django
+3. Use the twitter API
+4. Do something cool
+5. Deploy it to the provided machine
+6. Private whatever necessary to set up your project on a new box.  We will deploy it locally to try it out aswell.
 
 Notes:
 
