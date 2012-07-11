@@ -5,6 +5,8 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+	url('', 'twitter_thing.views.index'),
+	url(r'^puppies/$', 'twitter_thing.views.puppies')
     # Examples:
     # url(r'^$', 'twitter_thing.views.home', name='home'),
     # url(r'^twitter_thing/', include('twitter_thing.foo.urls')),
