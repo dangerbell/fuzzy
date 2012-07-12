@@ -47,6 +47,10 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+# Path to the directory that this file (settings.py) is in so we have
+# a dir to base our other dirs off and it will change when we deploy to a server.
+APP_PATH = os.path.realpath(os.path.dirname(__file__))
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
@@ -68,6 +72,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    APP_PATH + '/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -106,10 +111,8 @@ ROOT_URLCONF = 'twitter_thing.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'twitter_thing.wsgi.application'
 
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-
 TEMPLATE_DIRS = (
-    PROJECT_PATH + '/templates/'
+    APP_PATH + '/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -126,6 +129,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'twitter_thing',
 )
 
 # A sample logging configuration. The only tangible logging
