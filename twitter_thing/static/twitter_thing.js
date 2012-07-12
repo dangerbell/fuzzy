@@ -10,6 +10,18 @@
 	// callback=? is to enable JSONP.
 	var OPTIONS = '&include_entities=true&rpp=25&callback=?';
 
+	var imageQueue = [];
+
+	var placeImage = function() {
+		var src = imageQueue.shift();
+		if( typeof src != "undefined" ) {
+
+			// TODO: make a nice transition
+			// TODO: preload image then add to 
+			jQuery("#images").prepend('<img src="' + src + '" />');
+		}
+	};
+
 	// Take search results and pull out the images.
 	var parseEntities = function(data, textStatus, jqXHR){
 
@@ -26,20 +38,21 @@
 				var src = "";
 				if( urls[0].display_url.search(/instagr/) != -1 ) {
 					var INSTAGRAM_IMAGE_SUFFIX = "media/?size=l";
-					src = urls[0].expanded_url + INSTAGRAM_IMAGE_SUFFIX;
+					var src = urls[0].expanded_url + INSTAGRAM_IMAGE_SUFFIX
 				}
 
-				// put our cute puppy or kitty image on the screen.
+				// add our image to the display queue.
 				if( src !== "" ) {
-					jQuery("#images").append('<img src="' + src + '" />');
+					imageQueue.push(src);
 				}
 			}
 
 		});
-		debugger;
 	};
 
 	// Pull tweets about puppies and kitties from Twitter.
 	$.getJSON(SEARCH_URL + QUERY + OPTIONS, parseEntities);
+
+	var intervalID  = window.setInterval(placeImage, 5000)
 
 })(jQuery);

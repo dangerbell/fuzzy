@@ -23,7 +23,7 @@ body {
 .wrapper {
 	width: 640px;
 	min-height: 100%;
-	padding: 54px 14px 54px;
+	padding: 14px; /* 54px 14px 54px; */
 	margin: 0 auto;
 	background: url(https://twimg0-a.akamaihd.net/a/1341964605/t1/img/wash-white-30.png);
 }
