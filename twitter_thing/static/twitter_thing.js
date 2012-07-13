@@ -36,6 +36,8 @@
       }
     }
 
+    window.setTimeout(placeImage, 5000)
+
   };
 
   // Take search results and pull out the images.
@@ -70,9 +72,12 @@
     });
   };
 
-  // Pull tweets about puppies and kitties from Twitter.
-  $.getJSON(SEARCH_URL + QUERY + OPTIONS + JSONP_SUFFIX, parseEntities);
+  var init = function(data, textStatus, jqXHR) {
+    parseEntities(data, textStatus, jqXHR);
+    placeImage();
+  }
 
-  var intervalID  = window.setInterval(placeImage, 1000)
+  // Pull tweets about puppies and kitties from Twitter.
+  $.getJSON(SEARCH_URL + QUERY + OPTIONS + JSONP_SUFFIX, init);
 
 })(jQuery);
