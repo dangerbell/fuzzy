@@ -21,9 +21,22 @@ body {
 }
 
 .wrapper {
-	width: 640px;
+	width: 650px;
 	min-height: 100%;
 	padding: 14px; /* 54px 14px 54px; */
 	margin: 0 auto;
 	background: url(https://twimg0-a.akamaihd.net/a/1341964605/t1/img/wash-white-30.png);
+}
+
+.image {
+	border-radius: 6px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	background-color: white;
+	padding: 5px;
+}
+
+#staging {
+	position: absolute;
+	top: -1000px;
 }

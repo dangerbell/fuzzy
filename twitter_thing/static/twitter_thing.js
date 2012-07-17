@@ -21,9 +21,28 @@
     var src = imageQueue.shift();
     if( typeof src != "undefined" ) {
 
-      // TODO: make a nice transition
-      // TODO: preload image then add to 
-      jQuery("#images").prepend('<img src="' + src + '" />');
+      // Delay showing the image until it's fully loaded.
+      // The onLoad event will fire for the image when it's completely downloaded.
+      var $placeHolder = $('<img />');
+      $placeHolder.css('display', 'none');
+      $placeHolder.bind('load', function(){
+
+        // When our image is loaded remove it from the hidden staging area and attach it to the feed.
+        var img = jQuery("#images .image.new");
+        img.find('img').slideDown('slow');
+        img.removeClass('new');
+      });
+
+      // apparently you need to attach the load event before you set the 'src' property.
+      $placeHolder.prop('src', src);
+
+      var $imageWrapper = $('<div class="image new"></div>');
+      var $newImage = $imageWrapper.append($placeHolder);
+
+      // Attach the new image to the hidden staging area.
+      // Hidden means off the screen in this case.
+      $("#images").prepend($newImage);  
+      
     }
 
     // if we're low on images go get more images.
@@ -33,10 +52,12 @@
       if( typeof nextPage != "undefined") {
         // TODO: turn off the timer when we're out of pages.
         $.getJSON(SEARCH_URL + nextPage + JSONP_SUFFIX, parseEntities);
+      } else {
+        $.getJSON(SEARCH_URL + refreshUrl + JSONP_SUFFIX, parseEntities);
       }
     }
 
-    window.setTimeout(placeImage, 5000)
+    window.setTimeout(placeImage, 5000);
 
   };
 
@@ -60,7 +81,17 @@
         var src = "";
         if( urls[0].display_url.search(/instagr/) != -1 ) {
           var INSTAGRAM_IMAGE_SUFFIX = "media/?size=l";
-          var src = urls[0].expanded_url + INSTAGRAM_IMAGE_SUFFIX
+          src = urls[0].expanded_url + INSTAGRAM_IMAGE_SUFFIX;
+        }
+
+        if( urls[0].display_url.search(/yfrog/) != -1 ) {
+          var YFROG_IMAGE_SUFFIX = ":iphone"; // alternately ":medium", it's 640px
+          src = urls[0].expanded_url + YFROG_IMAGE_SUFFIX;
+        }
+
+        if( urls[0].display_url.search(/twitpic/) != -1) {
+          var TWITPIC_IMAGE_INFIX = '/show/large/';
+          // image format is twitpic.com/show/large/<unique_id>
         }
 
         // add our image to the display queue.
