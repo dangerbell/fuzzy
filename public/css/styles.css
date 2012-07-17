@@ -1,0 +1,42 @@
+* {
+  /* so nudging things with top/right/bottom/left will work automatically. As will z-index and position: absolute. */
+  position: relative;
+  vertical-align: middle;
+
+  /* Seriously, when do you ever have a repeating background image. */
+  background-repeat: no-repeat;
+  
+  /* change the box model in all browsers so that border & padding are drawn inside any specified width. */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+	/* steal background from twitter */
+	background-image: url(https://twimg0-a.akamaihd.net/images/themes/theme6/bg.gif);
+	background-position: left 0px;
+	background-attachment: fixed;
+	background-color: #709397;
+}
+
+.wrapper {
+	width: 650px;
+	min-height: 100%;
+	padding: 14px; /* 54px 14px 54px; */
+	margin: 0 auto;
+	background: url(https://twimg0-a.akamaihd.net/a/1341964605/t1/img/wash-white-30.png);
+}
+
+.image {
+	border-radius: 6px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	background-color: white;
+	padding: 5px;
+}
+
+#staging {
+	position: absolute;
+	top: -1000px;
+}
